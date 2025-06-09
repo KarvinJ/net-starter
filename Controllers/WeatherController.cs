@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Starter.Models;
+using Starter.Services;
 
 namespace Starter.Controllers;
 
@@ -7,27 +8,16 @@ namespace Starter.Controllers;
 [Route("[controller]")]
 public class WeatherController : ControllerBase
 {
-    private static readonly string[] Summaries =
-    [
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    ];
+    private readonly IWeatherService _weatherService;
 
-    private readonly ILogger<WeatherController> _logger;
-
-    public WeatherController(ILogger<WeatherController> logger)
+    public WeatherController(IWeatherService weatherService)
     {
-        _logger = logger;
+        _weatherService = weatherService;
     }
 
     [HttpGet]
     public IEnumerable<Weather> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Weather
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        return _weatherService.WeatherList();
     }
 }
