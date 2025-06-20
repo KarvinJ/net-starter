@@ -8,7 +8,7 @@ namespace Starter.Controllers;
 public class StarterController(IStarterService starterService) : ControllerBase
 {
     [HttpGet("{name}")]
-    public string Get(string name)
+    public string Hello(string name)
     {
         return starterService.Hello(name);
     }
