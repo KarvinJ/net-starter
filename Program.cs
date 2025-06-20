@@ -3,9 +3,8 @@ using Starter.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddScoped<IStarterService, StarterService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
