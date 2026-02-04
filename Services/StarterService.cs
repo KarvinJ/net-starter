@@ -1,6 +1,4 @@
-﻿using Starter.Models;
-
-namespace Starter.Services;
+﻿namespace Starter.Services;
 
 public interface IStarterService
 {
