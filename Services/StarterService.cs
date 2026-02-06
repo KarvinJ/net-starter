@@ -1,4 +1,6 @@
-﻿using Starter.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Starter.Helpers;
+using Starter.Models;
 
 namespace Starter.Services;
 
@@ -20,11 +22,13 @@ public interface IStarterService
 /// <inheritdoc />
 public class StarterService : IStarterService
 {
+    private readonly DataContext _context;
     /// <summary>
     /// 
     /// </summary>
-    public StarterService()
+    public StarterService(DataContext context)
     {
+        _context = context;
     }
 
     /// <inheritdoc />
@@ -33,8 +37,8 @@ public class StarterService : IStarterService
        return $"Hello, {name}";
     }
 
-    public Task<IEnumerable<Character>> GetAll()
+    public async Task<IEnumerable<Character>> GetAll()
     {
-        throw new NotImplementedException();
+        return await _context.Characters.ToListAsync();
     }
 }
